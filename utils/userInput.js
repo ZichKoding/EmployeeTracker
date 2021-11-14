@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const { viewAllDpts } = require('../db/connection.js');
 
 function initialQuestion() {
     inquirer
@@ -20,7 +21,10 @@ function initialQuestion() {
             }
         ])
         .then((answers) => {
-            console.log(JSON.stringify(answers, null, '  '));
+            if(answers['Initial Question'] === 'View all departments'){
+                viewAllDpts();
+            };
+            return JSON.stringify(answers, null, ' ');
         })
         .catch((error) => {
             if (error.isTtyError) {
@@ -30,5 +34,7 @@ function initialQuestion() {
             }
         });
 }
+
+
 
 module.exports = initialQuestion;
