@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { viewAllDpts } = require('../db/connection.js');
+const { viewAllDpts, viewAllRoles } = require('../db/connection.js');
 
 function initialQuestion() {
     inquirer
@@ -21,9 +21,14 @@ function initialQuestion() {
             }
         ])
         .then((answers) => {
-            if(answers['Initial Question'] === 'View all departments'){
+            const initQuestion = 'Initial Question';
+            if(answers[initQuestion] === 'View all departments'){
                 viewAllDpts();
-            };
+            }
+            else if(answers[initQuestion]) {
+                viewAllRoles();
+            }
+
             return JSON.stringify(answers, null, ' ');
         })
         .catch((error) => {

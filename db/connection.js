@@ -22,7 +22,20 @@ const viewAllDpts = () => {
     );
 };
 
+// View all roles
+const viewAllRoles = () => {
+    db.execute(
+        `SELECT roles.id, roles.title, roles.salary, departments.department_name FROM roles
+        JOIN departments
+        ON roles.department_id = departments.id`,
+        function(err, results, fields) {
+            console.table('Roles', results);
+        }
+    );
+};
+
 module.exports = {
     db,
-    viewAllDpts
+    viewAllDpts,
+    viewAllRoles
 };
